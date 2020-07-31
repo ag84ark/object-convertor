@@ -43,12 +43,4 @@ trait ObjectConstructorTrait
 
         return $this;
     }
-
-    /**
-     * @return self|BaseModelApi
-     */
-    public static function fromArray(array $arrayData)
-    {
-        return ObjectConvertor::toObjectBaseModelApi($arrayData, new self());
-    }
 }

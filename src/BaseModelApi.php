@@ -81,4 +81,12 @@ abstract class BaseModelApi implements ArrayAccess, Arrayable, Jsonable, JsonSer
     {
         unset($this->$offset);
     }
+
+    /**
+     * @return static
+     */
+    public static function fromArray(array $arrayData)
+    {
+        return ObjectConvertor::toObjectBaseModelApi($arrayData, new static());
+    }
 }
