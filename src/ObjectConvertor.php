@@ -50,7 +50,7 @@ class ObjectConvertor
 
             $k = $results[2] ?? '';
 
-            $k = strtolower($k[0]).substr($k, 1);
+            $k = strtolower(substr($k, 0, 1)).substr($k, 1);
 
             $k2 = Str::snake($k);
 

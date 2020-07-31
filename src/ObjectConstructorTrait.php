@@ -29,7 +29,7 @@ trait ObjectConstructorTrait
 
             $k = $results[2] ?? '';
 
-            $k = strtolower($k[0]).substr($k, 1);
+            $k = strtolower(substr($k, 0, 1)).substr($k, 1);
             $k2 = Str::snake($k);
 
             if ('set' === $pre && ! empty($array[$k])) {
@@ -42,5 +42,13 @@ trait ObjectConstructorTrait
         }
 
         return $this;
+    }
+
+    /**
+     * @return self|BaseModelApi
+     */
+    public static function fromArray(array $arrayData)
+    {
+        return ObjectConvertor::toObjectBaseModelApi($arrayData, new self());
     }
 }
