@@ -1,0 +1,61 @@
+{
+    "name": "ag84ark/object-convertor",
+    "description": "Array to object convert",
+    "keywords": [
+        "ag84ark",
+        "object-convertor"
+    ],
+    "homepage": "https://github.com/ag84ark/object-convertor",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "George Cojocaru",
+            "email": "arkangel062003@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^5.8|^6.0|^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7|~8",
+        "orchestra/testbench": "~3|~4|~5",
+        "sempro/phpunit-pretty-print": "^1.0",
+        "friendsofphp/php-cs-fixer": "^2.16"
+    },
+    "autoload": {
+        "psr-4": {
+            "ag84ark\\ObjectConvertor\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ag84ark\\ObjectConvertor\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "psalm": "vendor/bin/psalm",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "ag84ark\\ObjectConvertor\\ObjectConvertorServiceProvider"
+            ],
+            "aliases": {
+                "ObjectConvertor": "ag84ark\\ObjectConvertor\\ObjectConvertorFacade"
+            }
+        }
+    }
+}
