@@ -54,7 +54,7 @@ class ObjectConvertorServiceProvider extends ServiceProvider
 
         // Register the main class to use with the facade
         $this->app->singleton('object-convertor', function () {
-            return new ObjectConvertor;
+            return new ObjectConvertor();
         });
     }
 }

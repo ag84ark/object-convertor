@@ -2,12 +2,11 @@
 
 namespace ag84ark\ObjectConvertor\Tests;
 
-use Orchestra\Testbench\TestCase;
 use ag84ark\ObjectConvertor\ObjectConvertorServiceProvider;
+use Orchestra\Testbench\TestCase;
 
 class ExampleTest extends TestCase
 {
-
     protected function getPackageProviders($app)
     {
         return [ObjectConvertorServiceProvider::class];

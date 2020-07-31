@@ -1,6 +1,5 @@
 <?php
 
-
 namespace ag84ark\ObjectConvertor;
 
 use ArrayAccess;
@@ -10,23 +9,20 @@ use JsonSerializable;
 
 abstract class BaseModelApi implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
 {
-
-    public function toArray() : array  {
+    public function toArray(): array
+    {
         return  ObjectConvertor::toArray($this);
     }
 
-
-    public function toJson($options = 0) : string
+    public function toJson($options = 0): string
     {
         return json_encode($this->jsonSerialize(), $options);
     }
 
     /**
      * Convert the object into something JSON serializable.
-     *
-     * @return array
      */
-    public function jsonSerialize() : array
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }
@@ -44,10 +40,9 @@ abstract class BaseModelApi implements ArrayAccess, Arrayable, Jsonable, JsonSer
     /**
      * Determine if the given attribute exists.
      *
-     * @param  mixed  $offset
-     * @return bool
+     * @param mixed $offset
      */
-    public function offsetExists($offset) : bool
+    public function offsetExists($offset): bool
     {
         return ! is_null($this->$offset);
     }
@@ -55,25 +50,24 @@ abstract class BaseModelApi implements ArrayAccess, Arrayable, Jsonable, JsonSer
     /**
      * Get the value for a given offset.
      *
-     * @param  mixed  $offset
+     * @param mixed $offset
+     *
      * @return mixed
      */
     public function offsetGet($offset)
     {
-
         return $this->$offset ?? null;
     }
 
     /**
      * Set the value for a given offset.
      *
-     * @param  mixed  $offset
-     * @param  mixed  $value
-     * @return void
+     * @param mixed $offset
+     * @param mixed $value
      */
-    public function offsetSet($offset, $value) : void
+    public function offsetSet($offset, $value): void
     {
-        if (!is_null($offset) && $this->offsetExists($offset)) {
+        if (! is_null($offset) && $this->offsetExists($offset)) {
             $this->$offset = $value;
         }
     }
@@ -81,10 +75,9 @@ abstract class BaseModelApi implements ArrayAccess, Arrayable, Jsonable, JsonSer
     /**
      * Unset the value for a given offset.
      *
-     * @param  mixed  $offset
-     * @return void
+     * @param mixed $offset
      */
-    public function offsetUnset($offset) : void
+    public function offsetUnset($offset): void
     {
         unset($this->$offset);
     }

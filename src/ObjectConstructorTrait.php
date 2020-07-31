@@ -1,52 +1,46 @@
 <?php
 
-
 namespace ag84ark\ObjectConvertor;
-
 
 use Illuminate\Support\Str;
 
 trait ObjectConstructorTrait
 {
-
     /**
      * ObjectConstructorTrait constructor.
+     *
      * @param array|string|object $array
      */
-    public function __construct ( $array = [] ) {
-
-        if(is_string( $array)){
-            $array = json_decode( $array, true);
+    public function __construct($array = [])
+    {
+        if (is_string($array)) {
+            $array = json_decode($array, true);
         }
-        if(is_object( $array)) {
+        if (is_object($array)) {
             $array = (array) $array;
         }
 
         $methods = get_class_methods(self::class);
 
         foreach ($methods as $method) {
-
             preg_match('/^(set)(.*?)$/i', $method, $results);
 
-            $pre = $results[1]  ?? '';
+            $pre = $results[1] ?? '';
 
-            $k = $results[2]  ?? '';
+            $k = $results[2] ?? '';
 
-            $k = strtolower($k[0]) . substr($k, 1);
+            $k = strtolower($k[0]).substr($k, 1);
             $k2 = Str::snake($k);
 
-            If ($pre === 'set' && !empty($array[$k])) {
-
+            if ('set' === $pre && ! empty($array[$k])) {
                 $this->$method($array[$k]);
-            } elseif ($pre === 'set' && !empty($array[$k2])) {
-
+            } elseif ('set' === $pre && ! empty($array[$k2])) {
                 $this->$method($array[$k2]);
-            } elseif ($pre === 'set' && !empty($array[Str::ucfirst($k)])) {
-
+            } elseif ('set' === $pre && ! empty($array[Str::ucfirst($k)])) {
                 $this->$method($array[Str::ucfirst($k)]);
             }
         }
-        return $this;
 
+        return $this;
     }
 }
