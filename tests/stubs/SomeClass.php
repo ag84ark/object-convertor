@@ -1,6 +1,6 @@
 <?php
 
-namespace ag84ark\ObjectConvertor\Tests;
+namespace ag84ark\ObjectConvertor\Tests\stubs;
 
 use ag84ark\ObjectConvertor\BaseModelApi;
 use ag84ark\ObjectConvertor\ObjectConstructorTrait;
@@ -11,12 +11,15 @@ class SomeClass extends BaseModelApi
 
     private $a;
     private $b;
-    private $other = '';
-    private $BigVar = '';
-    private $camelVar = '';
-    private $snake_var = '';
+    private $other;
+    /** @var string */
+    private $BigVar;
+    /** @var string */
+    private $camelVar;
+    /** @var string */
+    private $snake_var;
 
-    public function getBigVar(): string
+    public function getBigVar(): ?string
     {
         return $this->BigVar;
     }
@@ -58,7 +61,7 @@ class SomeClass extends BaseModelApi
         $this->b = $b;
     }
 
-    public function getOther(): string
+    public function getOther(): ?string
     {
         return $this->other;
     }
@@ -68,7 +71,7 @@ class SomeClass extends BaseModelApi
         $this->other = $other;
     }
 
-    public function getCamelVar(): string
+    public function getCamelVar(): ?string
     {
         return $this->camelVar;
     }
@@ -78,7 +81,7 @@ class SomeClass extends BaseModelApi
         $this->camelVar = $camelVar;
     }
 
-    public function getSnakeVar(): string
+    public function getSnakeVar(): ?string
     {
         return $this->snake_var;
     }

@@ -53,8 +53,8 @@ class ObjectConvertorServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/object-convertor.php', 'object-convertor');
 
         // Register the main class to use with the facade
-        $this->app->singleton('object-convertor', function () {
-            return new ObjectConvertor();
-        });
+        //$this->app->singleton('object-convertor', function () {
+        //    return new ObjectConvertor();
+        //});
     }
 }

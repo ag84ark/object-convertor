@@ -66,7 +66,7 @@ class ObjectConvertor
         return $object;
     }
 
-    public static function toArray($object): array
+    public static function toArray($object, bool $withNulls = true): array
     {
         $array = [];
 
@@ -75,7 +75,7 @@ class ObjectConvertor
         $methods = get_class_methods($class);
 
         foreach ($methods as $method) {
-            preg_match('/^(get)(.*?)$/i', $method, $results);
+            preg_match(' /^(get)(.*?)$/i', $method, $results);
 
             $pre = $results[1] ?? '';
 
@@ -83,25 +83,33 @@ class ObjectConvertor
 
             $k = strtolower(substr($k, 0, 1)).substr($k, 1);
 
-            if ('get' === $pre) {
+            if ('get' == $pre) {
                 $array[$k] = $object->$method();
                 if (is_object($array[$k])) {
                     if (method_exists($array[$k], 'toArray')) {
-                        $array[$k] = $array[$k]->toArray();
+                        $array[$k] = $array[$k]->toArray($withNulls, $withNulls);
                     } else {
-                        $array[$k] = self::toArray($array[$k]);
+                        $array[$k] = self::toArray($array[$k], $withNulls);
                     }
                 }
                 if (is_array($array[$k])) {
                     foreach ($array[$k] as $key => $value) {
                         if (is_object($array[$k][$key])) {
                             if (method_exists($array[$k][$key], 'toArray')) {
-                                $array[$k][$key] = $array[$k][$key]->toArray();
+                                $array[$k][$key] = $array[$k][$key]->toArray($withNulls);
                             } else {
-                                $array[$k][$key] = self::toArray($array[$k][$key]);
+                                $array[$k][$key] = self::toArray($array[$k][$key], $withNulls);
+                            }
+
+                            if (false === $withNulls && null === $array[$k][$key]) {
+                                unset($array[$k][$key]);
                             }
                         }
                     }
+                }
+                // Remove null values if option is set
+                if (false === $withNulls && null === $array[$k]) {
+                    unset($array[$k]);
                 }
             }
         }

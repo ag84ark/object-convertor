@@ -9,9 +9,12 @@ use JsonSerializable;
 
 abstract class BaseModelApi implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
 {
-    public function toArray(): array
+    /**
+     * @param bool $withNull Return null values or not
+     */
+    public function toArray(bool $withNull = true): array
     {
-        return  ObjectConvertor::toArray($this);
+        return  ObjectConvertor::toArray($this, $withNull);
     }
 
     public function toJson($options = 0): string
@@ -35,6 +38,14 @@ abstract class BaseModelApi implements ArrayAccess, Arrayable, Jsonable, JsonSer
     public function __toString()
     {
         return $this->toJson();
+    }
+
+    /**
+     * @return static
+     */
+    public static function fromArray(array $arrayData)
+    {
+        return ObjectConvertor::toObjectBaseModelApi($arrayData, new static());
     }
 
     /**
@@ -80,13 +91,5 @@ abstract class BaseModelApi implements ArrayAccess, Arrayable, Jsonable, JsonSer
     public function offsetUnset($offset): void
     {
         unset($this->$offset);
-    }
-
-    /**
-     * @return static
-     */
-    public static function fromArray(array $arrayData)
-    {
-        return ObjectConvertor::toObjectBaseModelApi($arrayData, new static());
     }
 }

@@ -17,7 +17,7 @@ trait ObjectConstructorTrait
             $array = json_decode($array, true);
         }
         if (is_object($array)) {
-            $array = (array) $array;
+            $array = $array->toArray() ?? (array) $array;
         }
 
         $methods = get_class_methods(self::class);

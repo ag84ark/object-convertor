@@ -1,6 +1,6 @@
 <?php
 
-namespace ag84ark\ObjectConvertor\Tests;
+namespace ag84ark\ObjectConvertor\Tests\stubs;
 
 class BasicClass
 {

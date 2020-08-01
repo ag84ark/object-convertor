@@ -2,6 +2,8 @@
 
 namespace ag84ark\ObjectConvertor\Tests;
 
+use ag84ark\ObjectConvertor\Tests\stubs\SomeClass;
+
 class BaseModelApiTest extends TestCase
 {
     /** @var SomeClass */
@@ -40,5 +42,21 @@ class BaseModelApiTest extends TestCase
         $this->someClassObject->newVar = '123';
 
         $this->assertEquals($this->someClassObject->newVar, '123');
+    }
+
+    /** @test */
+    public function can_be_constructed_from_class(): void
+    {
+        $newClass = new SomeClass($this->someClassObject);
+
+        $this->assertEquals($this->someClassObject->getA(), $newClass->getA());
+    }
+
+    /** @test */
+    public function can_be_constructed_from_string(): void
+    {
+        $newClass = new SomeClass($this->someClassObject->toJson());
+
+        $this->assertEquals($this->someClassObject->getA(), $newClass->getA());
     }
 }

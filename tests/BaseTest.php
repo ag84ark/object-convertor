@@ -3,21 +3,11 @@
 namespace ag84ark\ObjectConvertor\Tests;
 
 use ag84ark\ObjectConvertor\ObjectConvertor;
+use ag84ark\ObjectConvertor\Tests\stubs\BasicClass;
+use ag84ark\ObjectConvertor\Tests\stubs\SomeClass;
 
 class BaseTest extends TestCase
 {
-    /** @test */
-    public function convert_array_to_object_via_constructor(): void
-    {
-        $array = ['a' => 'val_a', 'b' => 'val_b', 'other' => 'val_other'];
-
-        $someClassObject = new SomeClass($array);
-
-        $this->assertEquals($someClassObject->getA(), $array['a']);
-        $this->assertEquals($someClassObject->getB(), $array['b']);
-        $this->assertEquals($someClassObject->getOther(), $array['other']);
-    }
-
     /** @test */
     public function convert_array_to_object_fromArray(): void
     {
@@ -106,5 +96,40 @@ class BaseTest extends TestCase
 
         $this->assertEquals(SomeClass::class, get_class($someClassObject));
         $this->assertEquals($someClassObject->getSnakeVar(), $array['snake_var']);
+    }
+
+    /** @test */
+    public function convert_snake_case_attribute_4(): void
+    {
+        $array = ['snakeVar' => 'aaa'];
+
+        /** @var SomeClass $someClassObject */
+        $someClassObject = ObjectConvertor::toObject($array, new SomeClass());
+
+        $this->assertEquals(SomeClass::class, get_class($someClassObject));
+        $this->assertEquals($someClassObject->getSnakeVar(), $array['snakeVar']);
+    }
+
+    /** @test */
+    public function convert_snake_case_attribute_5(): void
+    {
+        $array = ['snakeVar' => 'aaa'];
+
+        /** @var SomeClass $someClassObject */
+        $someClassObject = ObjectConvertor::toObjectBaseModelApi($array, new SomeClass());
+
+        $this->assertEquals(SomeClass::class, get_class($someClassObject));
+        $this->assertEquals($someClassObject->getSnakeVar(), $array['snakeVar']);
+    }
+
+    /** @test */
+    public function can_be_converted_to_string(): void
+    {
+        $array = ['snake_var' => 'aaa'];
+
+        /** @var SomeClass $someClassObject */
+        $someClassObject = ObjectConvertor::toObject($array, new SomeClass());
+
+        $this->assertIsString((string) $someClassObject);
     }
 }
