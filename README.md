@@ -1,12 +1,22 @@
-# Very short description of the package
+# Object Convertor (works with Laravel)
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/ag84ark/object-convertor.svg?style=flat-square)](https://packagist.org/packages/ag84ark/object-convertor)
 [![Build Status](https://img.shields.io/travis/ag84ark/object-convertor/master.svg?style=flat-square)](https://travis-ci.org/ag84ark/object-convertor)
 [![Quality Score](https://img.shields.io/scrutinizer/g/ag84ark/object-convertor.svg?style=flat-square)](https://scrutinizer-ci.com/g/ag84ark/object-convertor)
 [![Total Downloads](https://img.shields.io/packagist/dt/ag84ark/object-convertor.svg?style=flat-square)](https://packagist.org/packages/ag84ark/object-convertor)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+This package helps too easily transform an array to a predefined class with setters and getters
 
+---
+For understanding better the use of this package please look at the `Usage` 
+as well as in the `tests` folder where you can understand better how to use this class.
+
+I created this package as it helps me a lot when I am working with JSON information in the DataBase that 
+is structured into classes and subclasses.
+
+Really hope that would be of some help to others as well!
+  
+---
 ## Installation
 
 You can install the package via composer:
@@ -16,6 +26,8 @@ composer require ag84ark/object-convertor
 ```
 
 ## Usage
+
+When creating classes for Laravel applications try to extend the `BaseModelApi` as helps you with a lot of things.
 
 #### Sample class
 ``` php
